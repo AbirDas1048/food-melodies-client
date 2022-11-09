@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const AddReview = () => {
+
+    const { user } = useContext(AuthContext);
+    const service = useLoaderData();
+    //console.log(service);
 
     const handleAddReview = event => {
         event.preventDefault();
         const form = event.target;
-        const serviceName = "Pizza";
-        const serviceId = "636b8430e635bb793e6289ff";
-        const userName = "Abir";
-        const userPhotoURL = "";
-        const userEmail = "abirdas422@gmail.com";
-        const review = form.description.value;
-        const ratings = form.ratings.value;
+        const serviceName = service?.name;
+        const serviceId = service?._id;
+        const userName = user?.displayName;
+        const userPhotoURL = user?.photoURL;
+        const userEmail = user?.email;
+        const reviewDes = form.reviewDes.value;
+        const ratings = parseFloat(form.ratings.value);
 
-        const service = {
+        const review = {
             serviceName,
             serviceId,
             userName,
             userPhotoURL,
             userEmail,
-            review,
+            reviewDes,
             ratings
         }
 
@@ -31,12 +37,12 @@ const AddReview = () => {
                 // authorization: `Bearer ${localStorage.getItem('genius-token')}`
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(service)
+            body: JSON.stringify(review)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if(data.acknowledged){
+                if (data.acknowledged) {
                     alert('Review added successfully')
                     form.reset();
                 }
@@ -46,7 +52,7 @@ const AddReview = () => {
 
     return (
         <Container className='my-3 text-center'>
-            <h2>Add Review</h2>
+            <h2>Add Review of {service?.name}</h2>
             <Row sm={8} className="justify-content-md-center">
                 <Col>
                     <Form onSubmit={handleAddReview}>
@@ -59,30 +65,30 @@ const AddReview = () => {
                             </Col>
                         </Form.Group> */}
 
-                        {/* <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm="2">
-                            Short Title
-                            </Form.Label>
-                            <Col sm="10">
-                                <Form.Control type='text' name='short_title' placeholder='Short Title' required/>
-                            </Col>
-                        </Form.Group> */}
-
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Ratings (out of 5)
+                                Email
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type='text' name='ratings' placeholder='Enter Ratings (out of 5)' required/>
+                                <Form.Control type='email' name='email' placeholder='Email' defaultValue={user?.email} required readOnly />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Description
+                                Ratings (out of 5)
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control as="textarea" rows={3} name='description' placeholder='Enter Description' required/>
+                                <Form.Control type='text' name='ratings' placeholder='Enter Ratings (out of 5)' required />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm="2">
+                                Description
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control as="textarea" rows={3} name='reviewDes' placeholder='Enter Description' required />
                             </Col>
                         </Form.Group>
 
@@ -100,7 +106,7 @@ const AddReview = () => {
                     </Form>
                 </Col>
             </Row>
-            
+
         </Container>
     );
 };
