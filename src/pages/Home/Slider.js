@@ -6,7 +6,7 @@ import image3 from '../../images/imageSlider3.jpg';
 
 const Slider = () => {
     return (
-        <Container>
+        // <Container>
             <Carousel className='my-3'>
                 <Carousel.Item interval={1000}>
                     <img
@@ -30,7 +30,7 @@ const Slider = () => {
                     />
                 </Carousel.Item>
             </Carousel>
-        </Container>
+        // </Container>
 
     );
 };
