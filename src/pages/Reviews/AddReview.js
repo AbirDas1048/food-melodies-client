@@ -46,6 +46,7 @@ const AddReview = () => {
                 if (data.acknowledged) {
                     alert('Review added successfully')
                     form.reset();
+                    
                 }
             })
             .catch(er => console.error(er));
