@@ -1,13 +1,16 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
 
     const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const [registrationError, setRegistrationError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation(); 
+    const from = location.state?.from?.pathname || '/'
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -26,7 +29,7 @@ const Register = () => {
                 form.reset();
 
                 handleUpdateUserProfile(name, photoURL);
-                //navigate(from, { replace: true });
+                navigate(from, { replace: true });
             })
             .catch(e => {
                 //console.error(e);

@@ -8,7 +8,7 @@ const AddReview = () => {
     const { user } = useContext(AuthContext);
     const data = useLoaderData();
     const service = data.details;
-    console.log(service);
+    //console.log(service);
 
     const handleAddReview = event => {
         event.preventDefault();

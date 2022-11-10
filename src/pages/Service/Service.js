@@ -10,7 +10,7 @@ const Service = () => {
     const service = data.details;
     const reviews = data.reviews;
     //console.log(reviews);
-    const user = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     //console.log(user);
     return (
         <Container className='my-3'>
@@ -28,7 +28,7 @@ const Service = () => {
                             <Col>
                                 <div className='text-center mb-3'>
                                     {
-                                        user ?
+                                        user?.uid ?
                                         <NavLink to={`/addReview/${service._id}`}>
                                             <Button variant='success opacity-75'>Add Review</Button>
                                         </NavLink>
