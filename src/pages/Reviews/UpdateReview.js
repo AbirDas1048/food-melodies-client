@@ -10,13 +10,42 @@ const UpdateReview = () => {
     const data = useLoaderData();
     //console.log(data);
 
+
+    const handleUpdate = event => {
+        event.preventDefault();
+        const form = event.target;
+        const id = data._id;
+        const reviewDes = form.reviewDes.value;
+        const ratings = parseFloat(form.ratings.value);
+
+        const updatedReview = {
+            reviewDes,
+            ratings
+        }
+
+        fetch(`http://localhost:5000/review/${id}`, {
+            method: 'PATCH', 
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedReview)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0) {
+                alert("Review Updated successfully");
+            }
+        })
+    }
+
     return (
         <Container className='my-3 text-center'>
             <h2>Update Review of {data?.serviceName}</h2>
             <Row sm={8} className="justify-content-md-center">
                 <Col>
-                    {/* <Form onSubmit={handleAddReview}> */}
-                    <Form>
+                    <Form onSubmit={ handleUpdate}>
+                    {/* <Form> */}
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
