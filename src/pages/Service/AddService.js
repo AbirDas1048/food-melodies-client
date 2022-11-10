@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddService = () => {
+
+    const navigate = useNavigate();
 
     const handleAddService = event => {
         event.preventDefault();
@@ -31,8 +35,9 @@ const AddService = () => {
             .then(data => {
                 //console.log(data)
                 if(data.acknowledged){
-                    alert('Service added successfully')
                     form.reset();
+                    toast('Service added successfully');
+                    navigate("/services");
                 }
             })
             .catch(er => console.error(er));
