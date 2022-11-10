@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStar } from "react-icons/fa";
 
 const Review = ({review}) => {
 
@@ -11,7 +12,7 @@ const Review = ({review}) => {
                         <span>{review.userName}</span>
                     </div>
                     <div className='d-flex'>
-                        <span>{review.ratings}</span>
+                        <span> <FaStar className='text-warning'></FaStar> {review.ratings}</span>
                     </div>
                     
                 </div>

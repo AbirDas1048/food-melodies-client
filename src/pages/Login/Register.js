@@ -24,9 +24,9 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 setRegistrationError('');
                 form.reset();
+                navigate(from, {replace: true})
 
                 handleUpdateUserProfile(name, photoURL);
                 navigate(from, { replace: true });
@@ -43,7 +43,7 @@ const Register = () => {
             photoURL: photoURL
         };
         updateUserProfile(profile)
-            .then(() => { })
+            .then(() => {})
             .catch(error => setRegistrationError(error.message));
     }
 
@@ -53,8 +53,8 @@ const Register = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                //navigate(from, { replace: true });
+                //console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setRegistrationError(error.message)

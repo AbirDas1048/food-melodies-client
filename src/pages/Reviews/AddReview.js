@@ -42,7 +42,7 @@ const AddReview = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 if (data.acknowledged) {
                     alert('Review added successfully')
                     form.reset();

@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { NavLink, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import Review from '../Reviews/Review';
+import './Service.css';
 
 
 const Service = () => {
@@ -18,14 +19,13 @@ const Service = () => {
                 service ?
                     <>
                         <Row>
-                            <Col>
+                            <Col md={6} xs={12}>
+                                <h2>{service.name}</h2>
                                 <img src={service.image} alt="" className='img-fluid w-100' />
-                                <h2>Name: {service.name}</h2>
-                                <h5>Served with {service.subTitle}</h5>
                                 <p>Details: {service.description}</p>
                                 <p className='fw-bolder'>Price {service.price}TK</p>
                             </Col>
-                            <Col>
+                            <Col md={6} xs={12}>
                                 <div className='text-center mb-3'>
                                     {
                                         user?.uid ?
@@ -39,11 +39,11 @@ const Service = () => {
                                 </div>
                                 {
                                     reviews.length > 0 ?
-                                    <>
+                                    <div className='overflow-scroll review-card'> 
                                         {
                                             reviews.map(review => <Review key={review._id} review={review}></Review>)
                                         }
-                                    </>
+                                    </div>
                                     :
                                     <h5 className='text-center'>No Review</h5>
                                 }

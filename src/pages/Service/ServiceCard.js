@@ -5,9 +5,15 @@ import './Service.css';
 
 const ServiceCard = ({service}) => {
 
+    const desLength = service.description.length;
+    let description = "";
+    if(desLength > 100){
+        description = service.description.substring(0, 100) + ' ...';
+    }
+    else{
+        description = service.description;
+    }
 
-
-    
     return (
         <Col>
                     <Card className='h-100'>
@@ -15,17 +21,11 @@ const ServiceCard = ({service}) => {
                         <Card.Body>
                         <Card.Title>{service.name}</Card.Title>
                         <Card.Text>
-                            {service.description}
+                            {description}
                         </Card.Text>
-                        <div className='d-flex justify-content-between'>
-                            <div>
-                                <span>Ratings: </span>
-                                <span>{service.ratings}</span>
-                            </div>
-                            <div>
-                                <span>Price: </span>
-                                <span>{service.price}TK</span>
-                            </div>
+                        <div>
+                            <span>Price: </span>
+                            <span>{service.price}TK</span>
                         </div>
                         </Card.Body>
                         <Card.Footer className='text-center'>
