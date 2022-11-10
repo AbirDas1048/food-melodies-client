@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
+import Blogs from "../pages/Blogs/Blogs";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
                 path: '/services',
                 element: <Services></Services>,
                 loader: () => fetch('http://localhost:5000/services')
+            },
+            {
+                path: '/blogs',
+                element: <Blogs></Blogs>
             },
             {
                 path: '/serviceDetails/:id',
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/*',
-                element: <div>404 Page Not Found</div>
+                element: <div className="my-3 text-center">404 Page Not Found</div>
             }
         ]
     }

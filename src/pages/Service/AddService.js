@@ -36,7 +36,7 @@ const AddService = () => {
                 //console.log(data)
                 if(data.acknowledged){
                     form.reset();
-                    toast('Service added successfully');
+                    toast.success('Service added successfully');
                     navigate("/services");
                 }
             })

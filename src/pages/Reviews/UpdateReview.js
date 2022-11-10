@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Form, Button, Col, Container, Row } from 'react-bootstrap';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const UpdateReview = () => {
@@ -8,6 +9,8 @@ const UpdateReview = () => {
     const { user } = useContext(AuthContext);
 
     const data = useLoaderData();
+
+    const navigate = useNavigate();
     //console.log(data);
 
 
@@ -34,7 +37,10 @@ const UpdateReview = () => {
         .then(data => {
             //console.log(data);
             if(data.modifiedCount > 0) {
-                alert("Review Updated successfully");
+                form.reset();
+                toast.info('Review updated successfully');
+                navigate("/myReviews");
+                //alert("Review Updated successfully");
             }
         })
     }

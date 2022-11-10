@@ -30,6 +30,7 @@ const Header = () => {
                     <Nav>
                         <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/home">Home</NavLink>
                         <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/services">Services</NavLink>
+                        <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/blogs">Blogs</NavLink>
                         {
                             user?.uid ?
                             <>

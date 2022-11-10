@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const AddReview = () => {
@@ -8,6 +9,7 @@ const AddReview = () => {
     const { user } = useContext(AuthContext);
     const data = useLoaderData();
     const service = data.details;
+    const navigate = useNavigate();
     //console.log(service);
 
     const handleAddReview = event => {
@@ -44,8 +46,9 @@ const AddReview = () => {
             .then(data => {
                 //console.log(data)
                 if (data.acknowledged) {
-                    alert('Review added successfully')
                     form.reset();
+                    toast.success('Review added successfully');
+                    navigate("/myReviews");
                     
                 }
             })

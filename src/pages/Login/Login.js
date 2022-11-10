@@ -88,7 +88,7 @@ const Login = () => {
                         <Button type='submit' variant='success'>Login</Button>
                         <p className='mt-1'>Or</p>
 
-                        <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} > Login with Google</Button>
+                        <Button className='mx-3' variant="outline-success" onClick={handleGoogleSignIn} > Login with Google</Button>
                         <Form.Text className="text-danger">
                             {loginError}
                         </Form.Text>

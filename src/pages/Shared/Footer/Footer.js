@@ -1,9 +1,10 @@
 import React from 'react';
+import { FaRegCopyright } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <div className=''>
-            <h2>This is Footer</h2>
+        <div className='text-center my-3 fixed-bottom'>
+            <FaRegCopyright></FaRegCopyright> Developed By Abir Das
         </div>
     );
 };

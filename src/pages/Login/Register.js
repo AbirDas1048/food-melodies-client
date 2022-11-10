@@ -106,11 +106,11 @@ const Register = () => {
                             </Col>
                         </Form.Group>
 
-                            <Button variant="primary" type="submit">
+                            <Button variant="success" type="submit">
                                 Register
                             </Button>
                             <p className='mt-1'>Or</p>
-                            <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} > Login with Google</Button>
+                            <Button className='mx-3' variant="outline-success" onClick={handleGoogleSignIn} > Login with Google</Button>
 
                         <p className='mt-3'>Already Have an Account <Link to='/login'>Login</Link></p>
 

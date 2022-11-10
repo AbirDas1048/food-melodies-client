@@ -3,6 +3,7 @@ import { Container, Table } from 'react-bootstrap';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const MyReviews = () => {
     const {user} = useContext(AuthContext);
@@ -28,7 +29,7 @@ const MyReviews = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0){
-                    alert('deleted successfully');
+                    toast.warning('Review deleted successfully');
                     const remaining = myReview.filter(review => review._id !== id);
                     setMyReview(remaining);
                 }
