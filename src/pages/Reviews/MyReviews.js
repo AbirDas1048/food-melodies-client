@@ -18,6 +18,24 @@ const MyReviews = () => {
         .then(res => res.json())
         .then(data => setMyReview(data))
     }, [email]);
+
+    const handleDelete = id =>{
+        const proceed = window.confirm('Are you sure, you want to cancel this order');
+        if(proceed){
+            fetch(`http://localhost:5000/review/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0){
+                    alert('deleted successfully');
+                    const remaining = myReview.filter(review => review._id !== id);
+                    setMyReview(remaining);
+                }
+            })
+        }
+    }
    
     return (
         <Container className='my-3'>
@@ -42,7 +60,8 @@ const MyReviews = () => {
                                 <td>{review.reviewDes}</td>
                                 <td className='text-center'>
                                     <NavLink to={`/myReviewUpadate/${review._id}`}><FaEdit className='text-info me-1'></FaEdit></NavLink>
-                                    <NavLink to={`/myReviewUpadate/${review._id}`}><FaTrash className='text-danger'></FaTrash></NavLink>
+                                    
+                                    <FaTrash onClick={() => handleDelete(review._id)} className='text-danger'></FaTrash>
                                     
                                     
                                 </td>
