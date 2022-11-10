@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { login } = useContext(AuthContext);
+    const { login, providerLogin } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation(); 
+    const from = location.state?.from?.pathname || '/'
 
     const handleLogin = event => {
         event.preventDefault();
@@ -15,6 +21,9 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setLoginError('');
+                form.reset();
+                navigate(from, {replace: true})
 
                 // const currentUser = {
                 //     email: user.email
@@ -37,7 +46,21 @@ const Login = () => {
                 //     })
                 //navigate(from, { replace: true });
             })
-            .catch(error => console.log(error));
+            .catch(error => setLoginError(error.message));
+    }
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                setLoginError(error.message);
+            })
     }
     return (
         <Container className='my-3 text-center'>
@@ -63,9 +86,15 @@ const Login = () => {
                             </Col>
                         </Form.Group>
 
+                        <Button type='submit' variant='success'>Login</Button>
+                        <p className='mt-1'>Or</p>
 
+                        <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} > Login with Google</Button>
+                        <Form.Text className="text-danger">
+                            {loginError}
+                        </Form.Text>
 
-                        <Button type='submit' variant='success'>Submit</Button>
+                        <p className='mt-3'>New to Food Melodies <Link to='/register'>Create a New Account</Link></p>
 
                     </Form>
                 </Col>

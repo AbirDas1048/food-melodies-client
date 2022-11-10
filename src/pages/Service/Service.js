@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { NavLink, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import Review from '../Reviews/Review';
 
 
 const Service = () => {
-    const service = useLoaderData();
-    //console.log(service);
+    const data = useLoaderData();
+    const service = data.details;
+    const reviews = data.reviews;
+    //console.log(reviews);
+    const user = useContext(AuthContext);
+    //console.log(user);
     return (
         <Container className='my-3'>
             {
@@ -20,11 +26,27 @@ const Service = () => {
                                 <p className='fw-bolder'>Price {service.price}TK</p>
                             </Col>
                             <Col>
-                                <div className='text-center'>
-                                    <NavLink to={`/addReview/${service._id}`}>
-                                        <Button variant='success opacity-75'>Add Review</Button>
-                                    </NavLink>
+                                <div className='text-center mb-3'>
+                                    {
+                                        user ?
+                                        <NavLink to={`/addReview/${service._id}`}>
+                                            <Button variant='success opacity-75'>Add Review</Button>
+                                        </NavLink>
+                                        :
+                                        <p>Please <NavLink to="/login">Login</NavLink> in to add Review</p>
+                                    }
+                                    
                                 </div>
+                                {
+                                    reviews.length > 0 ?
+                                    <>
+                                        {
+                                            reviews.map(review => <Review key={review._id} review={review}></Review>)
+                                        }
+                                    </>
+                                    :
+                                    <h5 className='text-center'>No Review</h5>
+                                }
                             </Col>
                         </Row>
                     </>

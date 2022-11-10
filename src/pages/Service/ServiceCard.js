@@ -4,6 +4,10 @@ import { NavLink } from 'react-router-dom';
 import './Service.css';
 
 const ServiceCard = ({service}) => {
+
+
+
+    
     return (
         <Col>
                     <Card className='h-100'>

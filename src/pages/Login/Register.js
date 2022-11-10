@@ -1,6 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
@@ -53,7 +54,7 @@ const Register = () => {
                 //navigate(from, { replace: true });
             })
             .catch(error => {
-                console.error(error);
+                setRegistrationError(error.message)
             })
     }
 
@@ -102,22 +103,14 @@ const Register = () => {
                             </Col>
                         </Form.Group>
 
+                            <Button variant="primary" type="submit">
+                                Register
+                            </Button>
+                            <p className='mt-1'>Or</p>
+                            <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} > Login with Google</Button>
 
-                        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control name="email" type="email" placeholder="Enter email" required />
-                        </Form.Group>
+                        <p className='mt-3'>Already Have an Account <Link to='/login'>Login</Link></p>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control name="password" type="password" placeholder="Password" required />
-                        </Form.Group> */}
-
-
-                        <Button variant="primary" type="submit">
-                            Register
-                        </Button>
-                        <Button className='mx-3' variant="outline-primary" onClick={handleGoogleSignIn} > Login with Google</Button>
                         <Form.Text className="text-danger">
                             {registrationError}
                         </Form.Text>

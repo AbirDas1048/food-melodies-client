@@ -6,8 +6,9 @@ import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 const AddReview = () => {
 
     const { user } = useContext(AuthContext);
-    const service = useLoaderData();
-    //console.log(service);
+    const data = useLoaderData();
+    const service = data.details;
+    console.log(service);
 
     const handleAddReview = event => {
         event.preventDefault();
@@ -91,15 +92,6 @@ const AddReview = () => {
                                 <Form.Control as="textarea" rows={3} name='reviewDes' placeholder='Enter Description' required />
                             </Col>
                         </Form.Group>
-
-                        {/* <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm="2">
-                            Price
-                            </Form.Label>
-                            <Col sm="10">
-                                <Form.Control type='text' name='price' placeholder='Enter Price' required/>
-                            </Col>
-                        </Form.Group> */}
 
                         <Button type='submit' variant='success'>Submit</Button>
 
