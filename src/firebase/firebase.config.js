@@ -13,14 +13,6 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_appId,
 };
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyAEy4UlqqLNjzF8rjkhP6hIzoDMo0P20Ho",
-//     authDomain: "food-melodies.firebaseapp.com",
-//     projectId: "food-melodies",
-//     storageBucket: "food-melodies.appspot.com",
-//     messagingSenderId: "684267064430",
-//     appId: "1:684267064430:web:814a2546cefcb2dfe6aa7f"
-// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

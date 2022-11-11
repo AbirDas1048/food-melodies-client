@@ -29,13 +29,26 @@ const Register = () => {
                 const user = result.user;
                 setRegistrationError('');
                 form.reset();
-                navigate(from, { replace: true })
 
-                handleUpdateUserProfile(name, photoURL);
-                navigate(from, { replace: true });
+                const currentUser = {
+                    email: user.email
+                }
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('foodToken', data.token);
+                        handleUpdateUserProfile(name, photoURL);
+                        navigate(from, { replace: true })
+                    })
             })
             .catch(e => {
-                //console.error(e);
                 setRegistrationError(e.message);
             });
     }
@@ -56,8 +69,22 @@ const Register = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                //console.log(user);
-                navigate(from, { replace: true });
+                setRegistrationError('');
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('foodToken', data.token);
+                        navigate(from, { replace: true })
+                    })
             })
             .catch(error => {
                 setRegistrationError(error.message)

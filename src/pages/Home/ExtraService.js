@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import deliveryPic from './../../delivey_pic.png';
+import deliveryPic from '../../images/delivey_pic.png';
 
 const ExtraService = () => {
     return (
