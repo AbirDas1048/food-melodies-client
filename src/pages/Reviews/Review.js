@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaStar } from "react-icons/fa";
 
-const Review = ({review}) => {
+const Review = ({ review }) => {
 
     return (
         <>
@@ -14,14 +14,14 @@ const Review = ({review}) => {
                     <div className='d-flex'>
                         <span> <FaStar className='text-warning'></FaStar> {review.ratings}</span>
                     </div>
-                    
+
                 </div>
                 <div className="card-body">
                     {/* <h5 className="card-title">Ratings: {review.ratings}</h5> */}
                     <p className="card-text">{review.reviewDes}</p>
                 </div>
             </div>
-            <br/>
+            <br />
         </>
     );
 };
