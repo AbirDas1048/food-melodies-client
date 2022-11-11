@@ -2,16 +2,19 @@ import React, { useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { NavLink, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import Review from '../Reviews/Review';
 import './Service.css';
 
 
 const Service = () => {
+
+    useTitle('Food Details & Review');
     const data = useLoaderData();
     const service = data.details;
     const reviews = data.reviews;
     //console.log(reviews);
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     //console.log(user);
     return (
         <Container className='my-3'>
@@ -29,23 +32,23 @@ const Service = () => {
                                 <div className='text-center mb-3'>
                                     {
                                         user?.uid ?
-                                        <NavLink to={`/addReview/${service._id}`}>
-                                            <Button variant='success opacity-75'>Add Review</Button>
-                                        </NavLink>
-                                        :
-                                        <p>Please <NavLink to="/login">Login</NavLink> in to add Review</p>
+                                            <NavLink to={`/addReview/${service._id}`}>
+                                                <Button variant='success opacity-75'>Add Review</Button>
+                                            </NavLink>
+                                            :
+                                            <p>Please <NavLink to="/login">Login</NavLink> in to add Review</p>
                                     }
-                                    
+
                                 </div>
                                 {
                                     reviews.length > 0 ?
-                                    <div className='overflow-scroll review-card'> 
-                                        {
-                                            reviews.map(review => <Review key={review._id} review={review}></Review>)
-                                        }
-                                    </div>
-                                    :
-                                    <h5 className='text-center'>No Review</h5>
+                                        <div className='overflow-scroll review-card'>
+                                            {
+                                                reviews.map(review => <Review key={review._id} review={review}></Review>)
+                                            }
+                                        </div>
+                                        :
+                                        <h5 className='text-center'>No Review</h5>
                                 }
                             </Col>
                         </Row>

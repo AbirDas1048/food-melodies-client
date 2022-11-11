@@ -2,8 +2,11 @@ import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import useTitle from '../../hooks/useTitle';
 
 const AddService = () => {
+
+    useTitle('Add Service');
 
     const navigate = useNavigate();
 
@@ -34,7 +37,7 @@ const AddService = () => {
             .then(res => res.json())
             .then(data => {
                 //console.log(data)
-                if(data.acknowledged){
+                if (data.acknowledged) {
                     form.reset();
                     toast.success('Service added successfully');
                     navigate("/services");
@@ -51,37 +54,37 @@ const AddService = () => {
                     <Form onSubmit={handleAddService}>
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Service Name
+                                Service Name
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type='text' name='service_name' placeholder='Enter Service Name' required/>
+                                <Form.Control type='text' name='service_name' placeholder='Enter Service Name' required />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Photo URL
+                                Photo URL
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type='text' name='image' placeholder='Photo URL' required/>
+                                <Form.Control type='text' name='image' placeholder='Photo URL' required />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Description
+                                Description
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control as="textarea" rows={3} name='description' placeholder='Enter Description' required/>
+                                <Form.Control as="textarea" rows={3} name='description' placeholder='Enter Description' required />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
-                            Price
+                                Price
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type='text' name='price' placeholder='Enter Price' required/>
+                                <Form.Control type='text' name='price' placeholder='Enter Price' required />
                             </Col>
                         </Form.Group>
 
@@ -90,7 +93,7 @@ const AddService = () => {
                     </Form>
                 </Col>
             </Row>
-            
+
         </Container>
     );
 };

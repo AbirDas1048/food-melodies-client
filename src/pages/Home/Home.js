@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import ServiceCard from '../Service/ServiceCard';
 import About from './About';
 import ExtraService from './ExtraService';
 import Slider from './Slider';
 
 const Home = () => {
+    useTitle('Home');
     const [services, setServices] = useState([]);
     const limit = 3;
 

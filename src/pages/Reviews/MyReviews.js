@@ -5,8 +5,10 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Review.css';
+import useTitle from '../../hooks/useTitle';
 
 const MyReviews = () => {
+    useTitle('My Reviews');
     const { user } = useContext(AuthContext);
     const email = user.email;
 

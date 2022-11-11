@@ -3,8 +3,11 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const AddReview = () => {
+
+    useTitle('Add Review');
 
     const { user } = useContext(AuthContext);
     const data = useLoaderData();

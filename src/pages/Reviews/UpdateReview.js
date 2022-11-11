@@ -3,8 +3,11 @@ import { Form, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const UpdateReview = () => {
+
+    useTitle('Update Review');
 
     const { user } = useContext(AuthContext);
 
@@ -27,22 +30,22 @@ const UpdateReview = () => {
         }
 
         fetch(`http://localhost:5000/review/${id}`, {
-            method: 'PATCH', 
+            method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(updatedReview)
         })
-        .then(res => res.json())
-        .then(data => {
-            //console.log(data);
-            if(data.modifiedCount > 0) {
-                form.reset();
-                toast.info('Review updated successfully');
-                navigate("/myReviews");
-                //alert("Review Updated successfully");
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data);
+                if (data.modifiedCount > 0) {
+                    form.reset();
+                    toast.info('Review updated successfully');
+                    navigate("/myReviews");
+                    //alert("Review Updated successfully");
+                }
+            })
     }
 
     return (
@@ -50,8 +53,8 @@ const UpdateReview = () => {
             <h2>Update Review of {data?.serviceName}</h2>
             <Row sm={8} className="justify-content-md-center">
                 <Col>
-                    <Form onSubmit={ handleUpdate}>
-                    {/* <Form> */}
+                    <Form onSubmit={handleUpdate}>
+                        {/* <Form> */}
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">

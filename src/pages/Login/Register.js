@@ -3,8 +3,11 @@ import React, { useContext, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const Register = () => {
+
+    useTitle('Register');
 
     const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const [registrationError, setRegistrationError] = useState('');
