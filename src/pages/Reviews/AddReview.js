@@ -51,9 +51,8 @@ const AddReview = () => {
         fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {
-                // 'content-type': 'application/json',
-                // authorization: `Bearer ${localStorage.getItem('genius-token')}`
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('foodToken')}`
             },
             body: JSON.stringify(review)
         })

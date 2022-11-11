@@ -9,7 +9,7 @@ import useTitle from '../../hooks/useTitle';
 
 const MyReviews = () => {
     useTitle('My Reviews');
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const email = user.email;
 
     const [myReview, setMyReview] = useState([]);
@@ -18,16 +18,31 @@ const MyReviews = () => {
 
     useEffect(() => {
         const uri = `http://localhost:5000/myReviews?email=${email}`;
-        fetch(uri)
-            .then(res => res.json())
+        fetch(uri, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('foodToken')}`
+            }
+        })
+            .then(res => {
+
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                }
+
+                return res.json()
+            })
             .then(data => setMyReview(data))
-    }, [email]);
+    }, [email, logOut]);
 
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
         if (proceed) {
             fetch(`http://localhost:5000/review/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('foodToken')}`
+                }
+
             })
                 .then(res => res.json())
                 .then(data => {

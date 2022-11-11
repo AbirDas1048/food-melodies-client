@@ -32,7 +32,8 @@ const UpdateReview = () => {
         fetch(`http://localhost:5000/review/${id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('foodToken')}`
             },
             body: JSON.stringify(updatedReview)
         })
