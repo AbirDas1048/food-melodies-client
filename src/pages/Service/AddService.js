@@ -25,7 +25,7 @@ const AddService = () => {
             price
         }
 
-        fetch('http://localhost:5000/service', {
+        fetch('https://food-melodies-server.vercel.app/service', {
             method: 'POST',
             headers: {
                 // 'content-type': 'application/json',

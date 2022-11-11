@@ -1,5 +1,5 @@
 # Food Melodies
-Live website link [Course Hut](https://course-hut.web.app/).
+Live website link [Food Melodies](https://food-melodies.web.app/).
 
 ## Project Description
 

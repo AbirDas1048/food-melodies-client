@@ -17,7 +17,7 @@ const MyReviews = () => {
     let i = 1;
 
     useEffect(() => {
-        const uri = `http://localhost:5000/myReviews?email=${email}`;
+        const uri = `https://food-melodies-server.vercel.app/myReviews?email=${email}`;
         fetch(uri, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('foodToken')}`
@@ -37,7 +37,7 @@ const MyReviews = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
         if (proceed) {
-            fetch(`http://localhost:5000/review/${id}`, {
+            fetch(`https://food-melodies-server.vercel.app/review/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('foodToken')}`

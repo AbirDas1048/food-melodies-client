@@ -13,7 +13,7 @@ const Home = () => {
     const limit = 3;
 
     useEffect(() => {
-        const uri = `http://localhost:5000/services?limit=${limit}`;
+        const uri = `https://food-melodies-server.vercel.app/services?limit=${limit}`;
         fetch(uri)
             .then(res => res.json())
             .then(data => setServices(data))

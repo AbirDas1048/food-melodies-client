@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ const UpdateReview = () => {
     useTitle('Update Review');
 
     const { user } = useContext(AuthContext);
+    const [ratingError, setRatingError] = useState('');
 
     const data = useLoaderData();
 
@@ -20,6 +21,17 @@ const UpdateReview = () => {
     const handleUpdate = event => {
         event.preventDefault();
         const form = event.target;
+
+        if (isNaN(form.ratings.value)) {
+            setRatingError('Please enter only number in rating');
+            return;
+        }
+
+        if (parseFloat(form.ratings.value) > 5) {
+            setRatingError('Rating value not more than 5');
+            return;
+        }
+
         const id = data._id;
         const reviewDes = form.reviewDes.value;
         const ratings = parseFloat(form.ratings.value);
@@ -29,7 +41,7 @@ const UpdateReview = () => {
             ratings
         }
 
-        fetch(`http://localhost:5000/review/${id}`, {
+        fetch(`https://food-melodies-server.vercel.app/review/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -83,6 +95,11 @@ const UpdateReview = () => {
                                 <Form.Control as="textarea" rows={3} name='reviewDes' defaultValue={data.reviewDes} placeholder='Enter Description' required />
                             </Col>
                         </Form.Group>
+
+                        <Form.Text className="text-danger">
+                            {ratingError}
+                        </Form.Text>
+                        <br />
 
                         <Button type='submit' variant='success'>Update</Button>
 

@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             {
                 path: '/services',
                 element: <Services></Services>,
-                loader: () => fetch('http://localhost:5000/services')
+                loader: () => fetch('https://food-melodies-server.vercel.app/services')
             },
             {
                 path: '/blogs',
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: '/serviceDetails/:id',
                 element: <Service></Service>,
-                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
+                loader: ({ params }) => fetch(`https://food-melodies-server.vercel.app/service/${params.id}`)
             },
             {
                 path: '/addService',
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: '/addReview/:id',
                 element: <PrivateRoute><AddReview></AddReview></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
+                loader: ({ params }) => fetch(`https://food-melodies-server.vercel.app/service/${params.id}`)
             },
             {
                 path: '/myReviews',
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             {
                 path: '/myReviewUpdate/:id',
                 element: <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/getReview/${params.id}`)
+                loader: ({ params }) => fetch(`https://food-melodies-server.vercel.app/getReview/${params.id}`)
             },
             {
                 path: '/login',
