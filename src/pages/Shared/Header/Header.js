@@ -6,13 +6,13 @@ import logo from '../../../logo.png';
 import './Header.css';
 
 const Header = () => {
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
-        .then(res => {
-            <Navigate to='/login'></Navigate>
-        })
+            .then(res => {
+                <Navigate to='/login'></Navigate>
+            })
     }
 
 
@@ -33,17 +33,18 @@ const Header = () => {
                         <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/blogs">Blogs</NavLink>
                         {
                             user?.uid ?
-                            <>
-                            <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/addService">Add Service</NavLink>
-                            <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/myReviews">My Reviews</NavLink>
-                            <NavLink className="nav-link" to="/logout"  onClick={handleLogOut}>Log out</NavLink>
-                            </>
-                            :
-                            <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/login">LogIn</NavLink>
+                                <>
+                                    <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/addService">Add Service</NavLink>
+                                    <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/myReviews">My Reviews</NavLink>
+                                    {/* <NavLink className="nav-link" to="/logout" onClick={handleLogOut}>Log out</NavLink> */}
+                                    <Nav.Link href="/" onClick={handleLogOut}>LogOut</Nav.Link>
+                                </>
+                                :
+                                <NavLink className="nav-link {({ isActive }) => isActive ? 'active' : undefined}" to="/login">LogIn</NavLink>
                         }
-                        
 
-                        
+
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>

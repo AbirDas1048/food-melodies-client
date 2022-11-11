@@ -4,73 +4,74 @@ import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './Review.css';
 
 const MyReviews = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const email = user.email;
-    
+
     const [myReview, setMyReview] = useState([]);
 
     let i = 1;
 
-    useEffect( () => {
+    useEffect(() => {
         const uri = `http://localhost:5000/myReviews?email=${email}`;
         fetch(uri)
-        .then(res => res.json())
-        .then(data => setMyReview(data))
+            .then(res => res.json())
+            .then(data => setMyReview(data))
     }, [email]);
 
-    const handleDelete = id =>{
+    const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
-        if(proceed){
+        if (proceed) {
             fetch(`http://localhost:5000/review/${id}`, {
                 method: 'DELETE'
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0){
-                    toast.warning('Review deleted successfully');
-                    const remaining = myReview.filter(review => review._id !== id);
-                    setMyReview(remaining);
-                }
-            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.warning('Review deleted successfully');
+                        const remaining = myReview.filter(review => review._id !== id);
+                        setMyReview(remaining);
+                    }
+                })
         }
     }
-   
+
     return (
         <Container className='my-3'>
             {
                 myReview.length > 0 ?
-                <Table responsive striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Service Name</th>
-                            <th>Ratings</th>
-                            <th>Review</th>
-                            <th className='text-center'>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            myReview.map( review => <tr key={review._id}>
-                                <td>{i++}</td>
-                                <td>{review.serviceName}</td>
-                                <td>{review.ratings}</td>
-                                <td>{review.reviewDes}</td>
-                                <td className='text-center'>
-                                    <NavLink to={`/myReviewUpadate/${review._id}`}><FaEdit className='text-info me-1'></FaEdit></NavLink>
-                                    
-                                    <FaTrash onClick={() => handleDelete(review._id)} className='text-danger'></FaTrash>
-                                    
-                                    
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </Table>
-                :
-                <h5 className='text-center'>No reviews were added</h5>
+                    <Table responsive striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Service Name</th>
+                                <th>Ratings</th>
+                                <th>Review</th>
+                                <th className='text-center'>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                myReview.map(review => <tr key={review._id}>
+                                    <td>{i++}</td>
+                                    <td>{review.serviceName}</td>
+                                    <td>{review.ratings}</td>
+                                    <td>{review.reviewDes}</td>
+                                    <td className='text-center'>
+                                        <NavLink to={`/myReviewUpdate/${review._id}`}><FaEdit className='text-info me-1'></FaEdit></NavLink>
+
+                                        <FaTrash onClick={() => handleDelete(review._id)} className='text-danger review-delete'></FaTrash>
+
+
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </Table>
+                    :
+                    <h5 className='text-center'>No reviews were added</h5>
             }
         </Container>
     );

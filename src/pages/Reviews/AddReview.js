@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,11 +10,23 @@ const AddReview = () => {
     const data = useLoaderData();
     const service = data.details;
     const navigate = useNavigate();
+    const [ratingError, setRatingError] = useState('');
     //console.log(service);
 
     const handleAddReview = event => {
         event.preventDefault();
+
         const form = event.target;
+
+        if (isNaN(form.ratings.value)) {
+            setRatingError('Please enter only number in rating');
+            return;
+        }
+
+        if (parseFloat(form.ratings.value) > 5) {
+            setRatingError('Rating value not more than 5');
+            return;
+        }
         const serviceName = service?.name;
         const serviceId = service?._id;
         const userName = user?.displayName;
@@ -49,7 +61,7 @@ const AddReview = () => {
                     form.reset();
                     toast.success('Review added successfully');
                     navigate("/myReviews");
-                    
+
                 }
             })
             .catch(er => console.error(er));
@@ -61,14 +73,6 @@ const AddReview = () => {
             <Row sm={8} className="justify-content-md-center">
                 <Col>
                     <Form onSubmit={handleAddReview}>
-                        {/* <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm="2">
-                            Email
-                            </Form.Label>
-                            <Col sm="10">
-                                <Form.Control type='text' name='service_name' placeholder='Enter Service Name' required/>
-                            </Col>
-                        </Form.Group> */}
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm="2">
@@ -96,6 +100,11 @@ const AddReview = () => {
                                 <Form.Control as="textarea" rows={3} name='reviewDes' placeholder='Enter Description' required />
                             </Col>
                         </Form.Group>
+
+                        <Form.Text className="text-danger">
+                            {ratingError}
+                        </Form.Text>
+                        <br />
 
                         <Button type='submit' variant='success'>Submit</Button>
 

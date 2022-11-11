@@ -8,7 +8,7 @@ const Login = () => {
     const { login, providerLogin } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
     const handleLogin = event => {
@@ -22,7 +22,7 @@ const Login = () => {
                 const user = result.user;
                 setLoginError('');
                 form.reset();
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
 
                 // const currentUser = {
                 //     email: user.email
@@ -85,13 +85,16 @@ const Login = () => {
                             </Col>
                         </Form.Group>
 
+                        <Form.Text className="text-danger">
+                            {loginError}
+                        </Form.Text>
+                        <br />
+
                         <Button type='submit' variant='success'>Login</Button>
                         <p className='mt-1'>Or</p>
 
                         <Button className='mx-3' variant="outline-success" onClick={handleGoogleSignIn} > Login with Google</Button>
-                        <Form.Text className="text-danger">
-                            {loginError}
-                        </Form.Text>
+
 
                         <p className='mt-3'>New to Food Melodies <Link to='/register'>Create a New Account</Link></p>
 

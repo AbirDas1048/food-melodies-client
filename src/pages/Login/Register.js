@@ -9,7 +9,7 @@ const Register = () => {
     const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
     const [registrationError, setRegistrationError] = useState('');
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
     const handleSignUp = event => {
@@ -26,7 +26,7 @@ const Register = () => {
                 const user = result.user;
                 setRegistrationError('');
                 form.reset();
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
 
                 handleUpdateUserProfile(name, photoURL);
                 navigate(from, { replace: true });
@@ -43,7 +43,7 @@ const Register = () => {
             photoURL: photoURL
         };
         updateUserProfile(profile)
-            .then(() => {})
+            .then(() => { })
             .catch(error => setRegistrationError(error.message));
     }
 
@@ -106,17 +106,20 @@ const Register = () => {
                             </Col>
                         </Form.Group>
 
-                            <Button variant="success" type="submit">
-                                Register
-                            </Button>
-                            <p className='mt-1'>Or</p>
-                            <Button className='mx-3' variant="outline-success" onClick={handleGoogleSignIn} > Login with Google</Button>
-
-                        <p className='mt-3'>Already Have an Account <Link to='/login'>Login</Link></p>
-
                         <Form.Text className="text-danger">
                             {registrationError}
                         </Form.Text>
+                        <br />
+
+                        <Button variant="success" type="submit">
+                            Register
+                        </Button>
+                        <p className='mt-1'>Or</p>
+                        <Button className='mx-3' variant="outline-success" onClick={handleGoogleSignIn} > Login with Google</Button>
+
+                        <p className='mt-3'>Already Have an Account <Link to='/login'>Login</Link></p>
+
+
                     </Form>
                 </Col>
             </Row>
